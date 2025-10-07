@@ -1,38 +1,755 @@
-.App {
-  text-align: center;
+/* =======================================
+   GLOBAL STYLES AND VARIABLES
+   ======================================= */
+:root {
+    /* Define the main red color for easy modification */
+    --red-primary: #991b1b; /* A darker, classic university red */
+    --red-light: #fef2f2;
+    --red-border: #fca5a5;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1f2937; /* Dark gray text */
+    background-color: #f9fafb; /* Off-white background */
+    min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.text-red-primary {
+    color: var(--red-primary);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.bg-red-primary {
+    background-color: var(--red-primary);
 }
 
-.App-link {
-  color: #61dafb;
+/* =======================================
+   LAYOUT AND SHELL
+   ======================================= */
+.app-shell {
+    min-height: 100vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-header {
+    background-color: white;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo-subtitle {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out;
+}
+
+.nav-link:hover {
+    color: var(--red-primary);
+}
+
+.admin-button {
+    font-size: 14px;
+    padding: 4px 12px;
+    border: 2px solid var(--red-primary);
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.admin-button:hover {
+    background-color: var(--red-light);
+}
+
+.main-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 16px;
+}
+
+.app-footer {
+    text-align: center;
+    padding: 24px 0;
+    color: #6b7280;
+    font-size: 14px;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 48px;
+}
+
+/* =======================================
+   BUTTONS
+   ======================================= */
+.primary-button {
+    padding: 10px 24px;
+    color: white;
+    border: none;
+    border-radius: 9999px; /* Pill shape */
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s;
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+.primary-button:hover {
+    background-color: #7f1d1d; /* Darker red on hover */
+}
+
+.primary-button.large {
+    padding: 12px 30px;
+    font-size: 16px;
+}
+
+.primary-button.wide {
+    width: 100%;
+    border-radius: 6px;
+    padding: 12px 0;
+}
+
+.secondary-button {
+    padding: 10px 24px;
+    border: 2px solid var(--red-light);
+    border-radius: 9999px;
+    background-color: white;
+    color: #374151;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.secondary-button:hover {
+    background-color: var(--red-light);
+}
+
+.tertiary-button {
+    padding: 10px 24px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    background-color: white;
+    color: #4b5563;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.tertiary-button:hover {
+    background-color: #f3f4f6;
+}
+
+/* =======================================
+   CLUB LIST (HOME)
+   ======================================= */
+.page-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 32px;
+}
+
+.page-description {
+    font-size: 18px;
+    color: #4b5563;
+    margin-bottom: 32px;
+    max-width: 768px;
+}
+
+.club-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+}
+
+.club-card {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.club-card:hover {
+    box-shadow: 0 20px 25px -5px var(--shadow-color);
+    transform: translateY(-4px);
+}
+
+.club-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.president-photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.club-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.club-tagline {
+    font-size: 14px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.club-body {
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.club-description {
+    font-size: 14px;
+    color: #374151;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 16px;
+}
+
+.club-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.club-president {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.club-president span {
+    font-weight: 600;
+    color: #374151;
+}
+
+/* =======================================
+   CLUB PROFILE PAGE
+   ======================================= */
+.club-profile-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
+}
+
+.club-profile-header {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+}
+
+.profile-president-photo {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--red-light);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.profile-title {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.profile-tagline {
+    font-size: 18px;
+    color: #4b5563;
+    font-style: italic;
+    margin-bottom: 16px;
+}
+
+.profile-description {
+    color: #374151;
+    margin-bottom: 24px;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.joined-status {
+    padding: 12px 24px;
+    background-color: #10b981; /* Green for success */
+    color: white;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+.profile-section {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.event-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.event-item {
+    border-left: 4px solid #ef4444; /* Bright red bar */
+    padding: 16px;
+    border-radius: 4px;
+    background-color: #f9fafb;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.event-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.event-date, .event-venue {
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* Gallery/Activities */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 144px; /* fixed height for uniformity */
+    object-fit: cover;
+}
+
+.gallery-caption {
+    padding: 8px;
+}
+
+.gallery-title {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.gallery-date {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    color: #6b7280;
+    padding: 16px;
+    border: 1px dashed #d1d5db;
+    border-radius: 8px;
+}
+
+/* =======================================
+   CALENDAR VIEW
+   ======================================= */
+.calendar-filter-bar {
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px var(--shadow-color);
+    max-width: 600px;
+}
+
+.filter-label {
+    font-weight: 500;
+}
+
+.filter-select {
+    padding: 8px;
+    border: 2px solid var(--red-border);
+    border-radius: 4px;
+}
+
+.calendar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.calendar-day-group {
+    padding: 16px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+    border-left: 4px solid var(--red-primary);
+}
+
+.calendar-date-header {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.calendar-events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.calendar-event-item {
+    padding: 12px;
+    border: 1px solid var(--red-light);
+    border-radius: 4px;
+    background-color: var(--red-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-details .event-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.event-details .event-venue {
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.event-club-link {
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.event-club-link:hover {
+    text-decoration: underline;
+}
+
+/* =======================================
+   UPDATES FEED
+   ======================================= */
+.updates-empty-state {
+    padding: 40px;
+    text-align: center;
+    border: 4px dashed var(--red-border);
+    border-radius: 12px;
+    background-color: white;
+    color: #6b7280;
+}
+
+.updates-empty-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.updates-explore-link {
+    display: block;
+    margin-top: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.updates-explore-link:hover {
+    text-decoration: underline;
+}
+
+.updates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.update-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border-left: 4px solid var(--red-primary);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px var(--shadow-color);
+    background-color: white;
+    align-items: center;
+}
+
+.update-content {
+    flex-grow: 1;
+}
+
+.update-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.update-meta {
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.update-date {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.update-action-button {
+    padding: 8px 16px;
+    border: 2px solid var(--red-primary);
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s;
+}
+
+.update-action-button:hover {
+    background-color: var(--red-light);
+}
+
+
+/* =======================================
+   ADMIN PANEL & MODAL
+   ======================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 16px;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 25px 50px -12px var(--shadow-color);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-close-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.admin-login-card {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    border-top: 4px solid var(--red-primary);
+}
+
+.admin-login-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.admin-login-info {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 16px;
+}
+
+.admin-input {
+    padding: 10px 16px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.admin-dashboard-container {
+    background-color: white;
+    padding: 16px 0;
+}
+
+.admin-dashboard-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.admin-actions-bar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.admin-club-list, .admin-event-list {
+    border: 1px solid var(--red-border);
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--red-light);
+}
+
+.list-title {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-bottom: 1px solid var(--red-border);
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-photo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.list-item-title {
+    font-weight: 500;
+}
+
+.list-item-meta {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.list-item-event {
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.list-item-event .event-title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.list-item-event .event-meta {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.list-item-event .event-club-name {
+    font-size: 12px;
+    font-style: italic;
 }
