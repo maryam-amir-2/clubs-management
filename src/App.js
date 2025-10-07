@@ -449,21 +449,19 @@ export default function App() {
   const [data, setData] = useStorageData();
   const [showAdmin, setShowAdmin] = useState(false);
 
-  return (
-    <Router basename="/">
+return (
+    <Router basename="/clubs-management">
       <AppShell onOpenAdmin={() => setShowAdmin(true)}>
         <Routes>
-          {/* Landing page is Discover */}
-          <Route path="/" element={<Home data={data} />} />
+          {/* Redirect root to /discover */}
+          <Route path="/" element={<Navigate to="/discover" replace />} />
           <Route path="/discover" element={<Home data={data} />} />
-
           <Route path="/club/:id" element={<ClubPage data={data} setData={setData} />} />
           <Route path="/calendar" element={<CalendarView data={data} />} />
           <Route path="/updates" element={<UpdatesFeed data={data} />} />
           <Route path="/admin" element={<AdminPanel data={data} setData={setData} />} />
         </Routes>
 
-        {/* Admin Modal */}
         {showAdmin && (
           <div className="modal-overlay">
             <div className="modal-content">
@@ -484,3 +482,4 @@ export default function App() {
     </Router>
   );
 }
+
