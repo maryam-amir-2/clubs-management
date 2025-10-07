@@ -450,25 +450,30 @@ export default function App() {
   const [showAdmin, setShowAdmin] = useState(false);
 
   return (
-    <Router>
+    <Router basename="/">
       <AppShell onOpenAdmin={() => setShowAdmin(true)}>
         <Routes>
+          {/* Landing page is Discover */}
           <Route path="/" element={<Home data={data} />} />
           <Route path="/discover" element={<Home data={data} />} />
+
           <Route path="/club/:id" element={<ClubPage data={data} setData={setData} />} />
           <Route path="/calendar" element={<CalendarView data={data} />} />
           <Route path="/updates" element={<UpdatesFeed data={data} />} />
           <Route path="/admin" element={<AdminPanel data={data} setData={setData} />} />
         </Routes>
 
-        {/* Admin Modal for Quick Access */}
+        {/* Admin Modal */}
         {showAdmin && (
           <div className="modal-overlay">
             <div className="modal-content">
               <div className="modal-header">
                 <h3 className={PRIMARY_COLOR_CLASS}>Administrative Access</h3>
-                <button onClick={() => setShowAdmin(false)} className="modal-close-button">
-                    Close (X)
+                <button
+                  onClick={() => setShowAdmin(false)}
+                  className="modal-close-button"
+                >
+                  Close (X)
                 </button>
               </div>
               <AdminPanel data={data} setData={setData} />
