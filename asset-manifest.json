@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/clubs-management/static/css/main.5901617e.css",
-    "main.js": "/clubs-management/static/js/main.ef1347f0.js",
+    "main.js": "/clubs-management/static/js/main.ceb4985b.js",
     "static/js/453.fba53b89.chunk.js": "/clubs-management/static/js/453.fba53b89.chunk.js",
     "index.html": "/clubs-management/index.html",
     "main.5901617e.css.map": "/clubs-management/static/css/main.5901617e.css.map",
-    "main.ef1347f0.js.map": "/clubs-management/static/js/main.ef1347f0.js.map",
+    "main.ceb4985b.js.map": "/clubs-management/static/js/main.ceb4985b.js.map",
     "453.fba53b89.chunk.js.map": "/clubs-management/static/js/453.fba53b89.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5901617e.css",
-    "static/js/main.ef1347f0.js"
+    "static/js/main.ceb4985b.js"
   ]
 }
